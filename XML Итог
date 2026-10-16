@@ -1,0 +1,41 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    exclude-result-prefixes="h">
+
+    <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+
+    <xsl:template match="/">
+        <items>
+            <xsl:apply-templates select="//h:li"/>
+        </items>
+    </xsl:template>
+
+    <xsl:template match="h:li">
+        <item>
+            <xsl:attribute name="id">
+                <xsl:number level="any" count="h:li"/>
+            </xsl:attribute>
+
+            <xsl:attribute name="parentid">
+                <xsl:choose>
+                    <xsl:when test="ancestor::h:li">
+          <xsl:for-each select="ancestor::h:li[1]">
+               <xsl:number level="any" count="h:li"/>
+                        </xsl:for-each>
+               </xsl:when>
+                    <xsl:otherwise>0</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+
+            <xsl:attribute name="author">
+                <xsl:value-of select="h:span[@class='author']"/>
+            </xsl:attribute>
+
+            <xsl:value-of select="h:p"/>
+        </item>
+    </xsl:template>
+
+</xsl:stylesheet>
