@@ -1,0 +1,51 @@
+using System;
+
+class Book
+{
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public int Year { get; set; }
+
+    public Book()
+    {
+        Title = "Без названия";
+        Author = "Неизвестен";
+        Year = 0;
+    }
+
+    public Book(string title, string author, int year)
+    {
+        Title = title;
+        Author = author;
+        Year = year;
+    }
+
+    public Book(string title, string author)
+    {
+        Title = title;
+        Author = author;
+        Year = 2024;
+    }
+
+    public void DisplayInfo()
+    {
+        Console.WriteLine("Название: " + Title);
+        Console.WriteLine("Автор: " + Author);
+        Console.WriteLine("Год издания: " + Year);
+        Console.WriteLine();
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Book book1 = new Book();
+        Book book2 = new Book("Мастер и Маргарита", "Михаил Булгаков", 1967);
+        Book book3 = new Book("Новая книга", "Иван Иванов");
+
+        book1.DisplayInfo();
+        book2.DisplayInfo();
+        book3.DisplayInfo();
+    }
+}
