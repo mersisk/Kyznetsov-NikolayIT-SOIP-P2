@@ -1,0 +1,64 @@
+using System;
+
+class Box<T>
+{
+    private T item = default!;
+
+    public void Put(T item)
+    {
+        this.item = item;
+    }
+
+    public T Get()
+    {
+        return item;
+    }
+}
+
+class Utils
+{
+    public static void Swap<T>(ref T a, ref T b)
+    {
+        T temp = a;
+        a = b;
+        b = temp;
+    }
+}
+
+class Pair<T1, T2>
+{
+    public T1 First { get; }
+    public T2 Second { get; }
+
+    public Pair(T1 first, T2 second)
+    {
+        First = first;
+        Second = second;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Box<int> numberBox = new Box<int>();
+        numberBox.Put(42);
+
+        Box<string> stringBox = new Box<string>();
+        stringBox.Put("Hello");
+
+        Console.WriteLine($"Число в коробке: {numberBox.Get()}");
+        Console.WriteLine($"Строка в коробке: {stringBox.Get()}");
+
+        int a = 5, b = 10;
+        Utils.Swap(ref a, ref b);
+        Console.WriteLine($"Числа после Swap: {a}, {b}");
+
+        string first = "Hello", second = "World";
+        Utils.Swap(ref first, ref second);
+        Console.WriteLine($"Строки после Swap: {first}, {second}");
+
+        Pair<int, string> pair = new Pair<int, string>(5, "Hello");
+        Console.WriteLine($"Первое значение: {pair.First}, Второе значение: {pair.Second}");
+    }
+}
